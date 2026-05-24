@@ -1,7 +1,10 @@
 extends Node
 
+## Emitted when a BulletMLBulletInstance is destroyed, before its queue_free().
 signal bullet_destroyed(bullet_type)
 
+## Resource holding bullet scenes with their type strings.
+## You must set this before starting any BulletMLBulletEmitters.
 var bullet_registry: BulletMLBulletRegistry
 
 func _spawn_bullet(spawner : BulletMLBulletInstance, fire : BulletMLFireASTNode, params = []):

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/bulletml/example/enemies/example_enemy.gd" type="Script" id=1]
-[ext_resource path="res://addons/bulletml/example/icon.png" type="Texture" id=2]
+[ext_resource path="res://addons/bulletml/example/other/icon.png" type="Texture" id=2]
 
 [node name="ExampleEnemy" type="KinematicBody2D"]
 modulate = Color( 1, 0, 0, 1 )

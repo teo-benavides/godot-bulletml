@@ -1,11 +1,22 @@
 extends BulletMLBulletInstance
 class_name BulletMLBulletEmitter, "res://addons/bulletml/icons/gun-blue.svg"
 
+## Use the temporary script loaded via
+## BulletMLScriptRepository.load_temp_script().
 export(bool) var use_temp_script = false
-export(String) var script_filename
-var top : String
-var running = false
 
+## Filename of the BulletML script to run.
+## Note that you don't need to provide the whole path,
+## but just the filename itself, as you have previously loaded the path via
+## BulletMLScriptRepository.load_scripts().
+export(String) var script_filename
+
+var _top : String
+var _running = false
+
+## Start execution of the BulletML script indicated by script_filename,
+## or the temp script loaded via BulletMLScriptRepository.load_temp_script()
+## if use_temp_script is set to true.
 func start():
     var script = BulletMLScriptRepository._get_bulletml_temp_parsed_script() if use_temp_script else BulletMLScriptRepository._get_bulletml_parsed_script(script_filename)
     if not script_filename.empty() and not script and not use_temp_script:
@@ -19,18 +30,20 @@ func start():
         for top in _runner.tops.slice(1, len(_runner.tops)):
             BulletMLSpawnManager._spawn_emitter(_runner.actions, _runner.fires, _runner.bullets, global_position, top)
 
-        top = _runner.tops[0]
-        running = true
-        _runner.run_specific(top)
+        _top = _runner.tops[0]
+        _running = true
+        _runner.run_specific(_top)
     elif not _runner.actions.empty():
         _runner.run_actions(_actions_local)
 
+## Stop BulletML script execution.
 func stop():
-    if running:
+    if _running:
         _runner.stop()
-        running = false
+        _running = false
 
+## Resume BulletML script execution.
 func resume():
-    if not running:
-        running = true
-        _runner.run_specific(top)
+    if not _running:
+        _running = true
+        _runner.run_specific(_top)

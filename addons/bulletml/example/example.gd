@@ -12,7 +12,7 @@ const SCRIPTS_PATH = "res://addons/bulletml/example/bulletml_scripts/"
 
 func _ready():
     BulletMLScriptRepository.load_scripts(SCRIPTS_PATH)
-    BulletMLSpawnManager.bullet_registry = load("res://addons/bulletml/example/bullet_registry.tres")
+    BulletMLSpawnManager.bullet_registry = load("res://addons/bulletml/example/other/bullet_registry.tres")
     BulletMLContext.spawn_parent = get_path()
 
     $BossEnemy.visible = false

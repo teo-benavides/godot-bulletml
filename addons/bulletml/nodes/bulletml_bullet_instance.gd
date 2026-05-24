@@ -2,7 +2,9 @@ extends KinematicBody2D
 
 class_name BulletMLBulletInstance, "res://addons/bulletml/icons/comet-blue.svg"
 
+## Emitted after _ready() is run.
 signal bullet_ready(node)
+## Emitted when destroying the bullet, before it is freed with queue_free().
 signal destroyed(_type)
 
 var _bullet : BulletMLBulletASTNode
@@ -34,9 +36,16 @@ var _direction_tween: Tween
 var _speed_tween: Tween
 var _accel_tween: Tween
 
+## Initialize position internally.
+## Disable if you want to set the position via the editor.
 export(bool) var initialize_position = true
+
+## Exempt from bulletml_bullet_instances group.
+## If you free bullets using call_group, this is useful to keep it alive.
 export(bool) var exempt_from_group = false
-var rotates = true
+
+## Whether the bullet rotates depending on its direction.
+export(bool) var rotates = true
 
 var _initial_position = Vector2()
 var _shooter : String
@@ -79,12 +88,16 @@ func _physics_process(delta):
     velocity.x += _speed_x
     velocity.y += _speed_y
     move_and_slide(velocity)
-    
+
+## Used internally.
+## Executes any BulletML corresponding to this bullet.
 func start():
     visible = true
     _runner.stack = _actions_local.duplicate(true)
     _runner.run()
 
+## Destroy the bullet.
+## Emits the signal destroyed and runs queue_free().
 func destroy():
     emit_signal("destroyed", _type)
     queue_free()
