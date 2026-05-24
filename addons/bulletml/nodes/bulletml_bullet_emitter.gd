@@ -1,7 +1,7 @@
 extends BulletMLBulletInstance
 class_name BulletMLBulletEmitter, "res://addons/bulletml/icons/gun-blue.svg"
 
-## Use the temporary script loaded via
+## Whether to use the temporary script loaded via
 ## BulletMLScriptRepository.load_temp_script().
 export(bool) var use_temp_script = false
 

@@ -4,6 +4,7 @@ class_name BulletMLBulletInstance, "res://addons/bulletml/icons/comet-blue.svg"
 
 ## Emitted after _ready() is run.
 signal bullet_ready(node)
+
 ## Emitted when destroying the bullet, before it is freed with queue_free().
 signal destroyed(_type)
 
@@ -40,8 +41,8 @@ var _accel_tween: Tween
 ## Disable if you want to set the position via the editor.
 export(bool) var initialize_position = true
 
-## Exempt from bulletml_bullet_instances group.
-## If you free bullets using call_group, this is useful to keep it alive.
+## Exempt from the bulletml_bullet_instances group.
+## If you free bullets using call_group, this is useful for keeping it alive.
 export(bool) var exempt_from_group = false
 
 ## Whether the bullet rotates depending on its direction.
