@@ -6,190 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "Reference",
-"class": "BulletMLAccelASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLAccelASTNode.gd"
-}, {
-"base": "Reference",
-"class": "BulletMLActionASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLActionASTNode.gd"
-}, {
-"base": "BulletMLRefASTNode",
-"class": "BulletMLActionRefASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLActionRefASTNode.gd"
-}, {
-"base": "Reference",
-"class": "BulletMLBulletASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLBulletASTNode.gd"
-}, {
-"base": "BulletMLBulletInstance",
-"class": "BulletMLBulletEmitter",
-"language": "GDScript",
-"path": "res://addons/bulletml/nodes/bulletml_bullet_emitter.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "BulletMLBulletInstance",
-"language": "GDScript",
-"path": "res://addons/bulletml/nodes/bulletml_bullet_instance.gd"
-}, {
-"base": "BulletMLRefASTNode",
-"class": "BulletMLBulletRefASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLBulletRefASTNode.gd"
-}, {
-"base": "Resource",
-"class": "BulletMLBulletRegistry",
-"language": "GDScript",
-"path": "res://addons/bulletml/bulletml_bullet_registry.gd"
-}, {
-"base": "Reference",
-"class": "BulletMLChangeDirectionASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLChangeDirectionASTNode.gd"
-}, {
-"base": "Reference",
-"class": "BulletMLChangeSpeedASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLChangeSpeedASTNode.gd"
-}, {
-"base": "BulletMLValueElementASTNode",
-"class": "BulletMLDirectionASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLDirectionASTNode.gd"
-}, {
-"base": "Reference",
-"class": "BulletMLFireASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLFireASTNode.gd"
-}, {
-"base": "BulletMLRefASTNode",
-"class": "BulletMLFireRefASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLFireRefASTNode.gd"
-}, {
-"base": "BulletMLValueElementASTNode",
-"class": "BulletMLHorizontalASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLHorizontalASTNode.gd"
-}, {
-"base": "BulletMLValueElementASTNode",
-"class": "BulletMLOffsetASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLOffsetASTNode.gd"
-}, {
-"base": "Reference",
-"class": "BulletMLParsedScript",
-"language": "GDScript",
-"path": "res://addons/bulletml/bulletml_parsed_script.gd"
-}, {
-"base": "Reference",
-"class": "BulletMLPopParamsASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLPopParamsASTNode.gd"
-}, {
-"base": "Reference",
-"class": "BulletMLRefASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLRefASTNode.gd"
-}, {
-"base": "Reference",
-"class": "BulletMLRepeatASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLRepeatASTNode.gd"
-}, {
-"base": "Reference",
-"class": "BulletMLRepeatedActionASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLRepeatedActionASTNode.gd"
-}, {
-"base": "Reference",
-"class": "BulletMLScriptLoader",
-"language": "GDScript",
-"path": "res://addons/bulletml/bulletml_script_loader.gd"
-}, {
-"base": "BulletMLValueElementASTNode",
-"class": "BulletMLSpeedASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLSpeedASTNode.gd"
-}, {
-"base": "BulletMLValueElementASTNode",
-"class": "BulletMLTermASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLTermASTNode.gd"
-}, {
-"base": "BulletMLValueElementASTNode",
-"class": "BulletMLTimesASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLTimesASTNode.gd"
-}, {
-"base": "Reference",
-"class": "BulletMLValueElementASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLValueElementASTNode.gd"
-}, {
-"base": "Reference",
-"class": "BulletMLVanishASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLVanishASTNode.gd"
-}, {
-"base": "BulletMLValueElementASTNode",
-"class": "BulletMLVerticalASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLVerticalASTNode.gd"
-}, {
-"base": "BulletMLValueElementASTNode",
-"class": "BulletMLWaitASTNode",
-"language": "GDScript",
-"path": "res://addons/bulletml/ast/BulletMLWaitASTNode.gd"
-}, {
-"base": "Node",
-"class": "_BulletMLRunner",
-"language": "GDScript",
-"path": "res://addons/bulletml/bulletml_runner.gd"
-} ]
-_global_script_class_icons={
-"BulletMLAccelASTNode": "",
-"BulletMLActionASTNode": "",
-"BulletMLActionRefASTNode": "",
-"BulletMLBulletASTNode": "",
-"BulletMLBulletEmitter": "res://addons/bulletml/icons/gun-blue.svg",
-"BulletMLBulletInstance": "res://addons/bulletml/icons/comet-blue.svg",
-"BulletMLBulletRefASTNode": "",
-"BulletMLBulletRegistry": "",
-"BulletMLChangeDirectionASTNode": "",
-"BulletMLChangeSpeedASTNode": "",
-"BulletMLDirectionASTNode": "",
-"BulletMLFireASTNode": "",
-"BulletMLFireRefASTNode": "",
-"BulletMLHorizontalASTNode": "",
-"BulletMLOffsetASTNode": "",
-"BulletMLParsedScript": "",
-"BulletMLPopParamsASTNode": "",
-"BulletMLRefASTNode": "",
-"BulletMLRepeatASTNode": "",
-"BulletMLRepeatedActionASTNode": "",
-"BulletMLScriptLoader": "",
-"BulletMLSpeedASTNode": "",
-"BulletMLTermASTNode": "",
-"BulletMLTimesASTNode": "",
-"BulletMLValueElementASTNode": "",
-"BulletMLVanishASTNode": "",
-"BulletMLVerticalASTNode": "",
-"BulletMLWaitASTNode": "",
-"_BulletMLRunner": ""
-}
+config_version=5
 
 [application]
 
 config/name="BulletML Sandbox 2"
 run/main_scene="res://addons/bulletml/example/example.tscn"
+config/features=PackedStringArray("4.6")
 config/icon="res://icon.png"
 
 [autoload]
@@ -200,7 +23,7 @@ BulletMLSpawnManager="*res://addons/bulletml/bulletml_spawn_manager.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/bulletml/plugin.cfg" )
+enabled=PackedStringArray("res://addons/bulletml/plugin.cfg")
 
 [gui]
 
@@ -214,4 +37,3 @@ common/enable_pause_aware_picking=true
 
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
-vram_compression/import_etc2=false

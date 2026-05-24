@@ -41,17 +41,17 @@ func _direction_to_value(direction : BulletMLDirectionASTNode, bullet_instance :
         if direction.type != null:
             match direction.type:
                 BulletMLDirectionASTNode.Type.AIM:
-                    return (atan2(player_position.y-bullet_instance.global_position.y, player_position.x-bullet_instance.global_position.x)+(PI/2)) + deg2rad(direction.get_value())
+                    return (atan2(player_position.y-bullet_instance.global_position.y, player_position.x-bullet_instance.global_position.x)+(PI/2)) + deg_to_rad(direction.get_value())
                 BulletMLDirectionASTNode.Type.ABSOLUTE:
-                    return deg2rad(direction.get_value())
+                    return deg_to_rad(direction.get_value())
                 BulletMLDirectionASTNode.Type.RELATIVE:
-                    return bullet_instance._angle + deg2rad(direction.get_value())
+                    return bullet_instance._angle + deg_to_rad(direction.get_value())
                 BulletMLDirectionASTNode.Type.SEQUENCE:
-                    return bullet_instance._last_angle + deg2rad(direction.get_value())
+                    return bullet_instance._last_angle + deg_to_rad(direction.get_value())
                 _:
-                    return bullet_instance._last_angle + deg2rad(direction.get_value())
+                    return bullet_instance._last_angle + deg_to_rad(direction.get_value())
         if direction.value:
-            return bullet_instance.get_angle_to(player_position)+(PI/2)*3 + deg2rad(direction.get_value())
+            return bullet_instance.get_angle_to(player_position)+(PI/2)*3 + deg_to_rad(direction.get_value())
         return bullet_instance.get_angle_to(player_position)+(PI/2)*3
     return bullet_instance.get_angle_to(player_position)+(PI/2)*3
 
@@ -77,7 +77,7 @@ func _offset_to_value(offset : BulletMLOffsetASTNode) -> float:
 func _offset_position(position : Vector2, offset : BulletMLOffsetASTNode, rotation = 0.0) -> Vector2:
     var vec2 = Vector2()
     if offset != null:
-        if not offset.value.empty():
+        if not offset.value.is_empty():
             return position + Vector2(0, -offset.get_value()).rotated(rotation)
         else:
             if offset.horizontal != null:

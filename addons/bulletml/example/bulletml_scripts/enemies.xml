@@ -1,6 +1,6 @@
 <action label="top">
 	<fireRef label="spawn-zakos-wiggle-left">
-		<param>30</param>
+		<param>1</param>
 		<param>50</param>
 	</fireRef>
 </action>
@@ -23,7 +23,7 @@
 						</offset>
 						<bulletRef label="wiggle-zako">
 							<param>100</param>
-							<param>0.4</param>
+							<param>2.0</param>
 						</bulletRef>
 					</fire>
 					<wait>0.25</wait>
@@ -35,7 +35,7 @@
 
 <!--$1 = distance wiggled-->
 <!--$2 = wiggle frequency-->
-<bullet shooter="aim-random-x1.xml" type="zako" label="wiggle-zako">
+<bullet type="zako" label="wiggle-zako">
 	<action>
 		<repeat><times>-1</times>
 			<action>

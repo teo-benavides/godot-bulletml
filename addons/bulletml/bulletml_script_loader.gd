@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 class_name BulletMLScriptLoader
 
 static func parse_script(file : String) -> BulletMLParsedScript:
@@ -22,7 +22,7 @@ static func parse_script(file : String) -> BulletMLParsedScript:
                 script.bullets[bullet.label] = bullet
     return script
     
-static func parse_temp_script(buffer : PoolByteArray) -> BulletMLParsedScript:
+static func parse_temp_script(buffer : PackedByteArray) -> BulletMLParsedScript:
     var xml = XMLParser.new()
     var script = BulletMLParsedScript.new()
     var err = xml.open_buffer(buffer)

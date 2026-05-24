@@ -8,12 +8,11 @@ var _temp_script: BulletMLParsedScript
 func load_scripts(path: String):
     if not path.ends_with("/") and not path.ends_with("\\"):
         path = path + "/"
-    var dir := Directory.new()
-    dir.open(path)
-    dir.list_dir_begin(true)
+    var dir := DirAccess.open(path)
+    dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 
     var file = dir.get_next()
-    while not file.empty():
+    while not file.is_empty():
         _set_bulletml_parsed_script(file, BulletMLScriptLoader.parse_script(path + file))
         file = dir.get_next()
 
@@ -24,7 +23,7 @@ func load_scripts(path: String):
 ## which can later be run from BulletMLBulletEmitters with
 ## use_temp_script set to true.
 func load_temp_script(script: String):
-    _temp_script = BulletMLScriptLoader.parse_temp_script(script.to_utf8())
+    _temp_script = BulletMLScriptLoader.parse_temp_script(script.to_utf8_buffer())
 
 func _get_bulletml_parsed_script(script_name : String) -> BulletMLParsedScript:
     var script = _parsed_scripts.get(script_name)

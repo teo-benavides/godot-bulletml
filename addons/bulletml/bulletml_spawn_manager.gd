@@ -19,10 +19,10 @@ func _spawn_bullet(spawner : BulletMLBulletInstance, fire : BulletMLFireASTNode,
     if fire.speed:
         speed = fire.speed
     if params:
-        if not params.empty():
+        if not params.is_empty():
             bullet._runner.params_stack.append(params)
             
-    bullet.connect("destroyed", self, "_on_bullet_destroyed")
+    bullet.connect("destroyed", Callable(self, "_on_bullet_destroyed"))
     spawner._last_angle = BulletMLContext._direction_to_value(direction, spawner)
     spawner._last_speed = BulletMLContext._speed_to_value(speed, spawner._last_speed)
     
@@ -44,7 +44,7 @@ func _spawn_bullet(spawner : BulletMLBulletInstance, fire : BulletMLFireASTNode,
     if bullet.rotates:
         bullet.rotation = bullet._angle
 
-    bullet.connect("bullet_ready", self, "_on_bullet_ready")
+    bullet.connect("bullet_ready", Callable(self, "_on_bullet_ready"))
     if not BulletMLContext.spawn_parent:
         assert(false, "spawn_parent not set! Make sure to set it by assigning a NodePath to BulletMLContext.spawn_parent.")
     var spawn_parent_node = get_node(BulletMLContext.spawn_parent)
@@ -75,15 +75,15 @@ func _instance_bullet(type : String) -> BulletMLBulletInstance:
         assert(false, "bullet_registry not set! Create a BulletMLBulletRegistry resource and assign it at runtime to BulletMLSpawnManager.bullet_registry.")
     var bullet = bullet_registry.entries.get(type)
     if bullet:
-        return bullet.instance()
+        return bullet.instantiate()
     assert(false, "Bullet type " + type + " not found! Make sure you have registered it in your BulletMLBulletRegistry resource.")
     return null
 
 func _on_bullet_ready(bullet : BulletMLBulletInstance):
-    if not bullet._shooter.empty():
+    if not bullet._shooter.is_empty():
         var new_shooter = BulletMLBulletEmitter.new()
         new_shooter.script_filename = bullet._shooter
-        new_shooter.connect("bullet_ready", self, "_on_bullet_ready")
+        new_shooter.connect("bullet_ready", Callable(self, "_on_bullet_ready"))
         bullet.call_deferred("add_child", new_shooter)
     bullet.start()
 

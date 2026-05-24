@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://addons/bulletml/example/bullets/bullet.png" type="Texture" id=1]
+[ext_resource path="res://addons/bulletml/example/bullets/bullet.png" type="Texture2D" id=1]
 [ext_resource path="res://addons/bulletml/example/bullets/example_bullet.gd" type="Script" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -27,15 +27,15 @@ animations = [ {
 "speed": 20.0
 } ]
 
-[node name="BulletMLBulletInstance" type="KinematicBody2D"]
+[node name="BulletMLBulletInstance" type="CharacterBody2D"]
 script = ExtResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 frames = SubResource( 5 )
 playing = true
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2( -5.96046e-08, 4.76837e-07 )
 scale = Vector2( 0.2, 0.2 )
 
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

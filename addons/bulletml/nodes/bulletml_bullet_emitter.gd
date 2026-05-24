@@ -1,15 +1,16 @@
+@icon("res://addons/bulletml/icons/gun-blue.svg")
 extends BulletMLBulletInstance
-class_name BulletMLBulletEmitter, "res://addons/bulletml/icons/gun-blue.svg"
+class_name BulletMLBulletEmitter
 
 ## Whether to use the temporary script loaded via
 ## BulletMLScriptRepository.load_temp_script().
-export(bool) var use_temp_script = false
+@export var use_temp_script: bool = false
 
 ## Filename of the BulletML script to run.
 ## Note that you don't need to provide the whole path,
 ## but just the filename itself, as you have previously loaded the path via
 ## BulletMLScriptRepository.load_scripts().
-export(String) var script_filename
+@export var script_filename: String
 
 var _top : String
 var _running = false
@@ -19,7 +20,7 @@ var _running = false
 ## if use_temp_script is set to true.
 func start():
     var script = BulletMLScriptRepository._get_bulletml_temp_parsed_script() if use_temp_script else BulletMLScriptRepository._get_bulletml_parsed_script(script_filename)
-    if not script_filename.empty() and not script and not use_temp_script:
+    if not script_filename.is_empty() and not script and not use_temp_script:
         printerr("BulletML script " + script_filename + " not found! Did you load scripts with BulletMLScriptRepository.load_scripts()?")
     if script:
         _runner.actions = script.actions
@@ -33,7 +34,7 @@ func start():
         _top = _runner.tops[0]
         _running = true
         _runner.run_specific(_top)
-    elif not _runner.actions.empty():
+    elif not _runner.actions.is_empty():
         _runner.run_actions(_actions_local)
 
 ## Stop BulletML script execution.

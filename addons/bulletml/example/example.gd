@@ -10,6 +10,8 @@ enum {
 
 const SCRIPTS_PATH = "res://addons/bulletml/example/bulletml_scripts/"
 
+@export var code_highlighter: CodeHighlighter
+
 func _ready():
     BulletMLScriptRepository.load_scripts(SCRIPTS_PATH)
     BulletMLSpawnManager.bullet_registry = load("res://addons/bulletml/example/other/bullet_registry.tres")
@@ -51,8 +53,7 @@ func open_temp_script(script: String):
     emitter.start()
 
 func get_script_file_contents(filename: String):
-    var file = File.new()
-    file.open(SCRIPTS_PATH + filename, File.READ)
+    var file = FileAccess.open(SCRIPTS_PATH + filename, FileAccess.READ)
     var content = file.get_as_text()
     file.close()
     return content
@@ -88,28 +89,28 @@ func _on_option_button_item_selected(index):
             $UI/Container/Input.text = get_script_file_contents("boss.xml")
 
 func _configure_syntax_highlighting():
-    $UI/Container/Input.add_keyword_color("accel", Color.orange)
-    $UI/Container/Input.add_keyword_color("action", Color.orange)
-    $UI/Container/Input.add_keyword_color("actionRef", Color.orange)
-    $UI/Container/Input.add_keyword_color("bullet", Color.orange)
-    $UI/Container/Input.add_keyword_color("bulletRef", Color.orange)
-    $UI/Container/Input.add_keyword_color("changeDirection", Color.orange)
-    $UI/Container/Input.add_keyword_color("changeSpeed", Color.orange)
-    $UI/Container/Input.add_keyword_color("direction", Color.orange)
-    $UI/Container/Input.add_keyword_color("fire", Color.orange)
-    $UI/Container/Input.add_keyword_color("fireRef", Color.orange)
-    $UI/Container/Input.add_keyword_color("horizontal", Color.orange)
-    $UI/Container/Input.add_keyword_color("offset", Color.orange)
-    $UI/Container/Input.add_keyword_color("param", Color.orange)
-    $UI/Container/Input.add_keyword_color("repeat", Color.orange)
-    $UI/Container/Input.add_keyword_color("speed", Color.orange)
-    $UI/Container/Input.add_keyword_color("term", Color.orange)
-    $UI/Container/Input.add_keyword_color("vanish", Color.orange)
-    $UI/Container/Input.add_keyword_color("vertical", Color.orange)
-    $UI/Container/Input.add_keyword_color("wait", Color.orange)
-    
-    $UI/Container/Input.add_keyword_color("type", Color.crimson)
-    $UI/Container/Input.add_keyword_color("label", Color.crimson)
-    $UI/Container/Input.add_keyword_color("shooter", Color.crimson)
-    
-    $UI/Container/Input.add_keyword_color("times", Color.hotpink)
+    code_highlighter.add_keyword_color("accel", Color.ORANGE)
+    code_highlighter.add_keyword_color("action", Color.ORANGE)
+    code_highlighter.add_keyword_color("actionRef", Color.ORANGE)
+    code_highlighter.add_keyword_color("bullet", Color.ORANGE)
+    code_highlighter.add_keyword_color("bulletRef", Color.ORANGE)
+    code_highlighter.add_keyword_color("changeDirection", Color.ORANGE)
+    code_highlighter.add_keyword_color("changeSpeed", Color.ORANGE)
+    code_highlighter.add_keyword_color("direction", Color.ORANGE)
+    code_highlighter.add_keyword_color("fire", Color.ORANGE)
+    code_highlighter.add_keyword_color("fireRef", Color.ORANGE)
+    code_highlighter.add_keyword_color("horizontal", Color.ORANGE)
+    code_highlighter.add_keyword_color("offset", Color.ORANGE)
+    code_highlighter.add_keyword_color("param", Color.ORANGE)
+    code_highlighter.add_keyword_color("repeat", Color.ORANGE)
+    code_highlighter.add_keyword_color("speed", Color.ORANGE)
+    code_highlighter.add_keyword_color("term", Color.ORANGE)
+    code_highlighter.add_keyword_color("vanish", Color.ORANGE)
+    code_highlighter.add_keyword_color("vertical", Color.ORANGE)
+    code_highlighter.add_keyword_color("wait", Color.ORANGE)
+
+    code_highlighter.add_keyword_color("type", Color.CRIMSON)
+    code_highlighter.add_keyword_color("label", Color.CRIMSON)
+    code_highlighter.add_keyword_color("shooter", Color.CRIMSON)
+
+    code_highlighter.add_keyword_color("times", Color.HOT_PINK)

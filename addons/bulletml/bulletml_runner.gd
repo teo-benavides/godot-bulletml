@@ -20,7 +20,7 @@ var timer : Timer
 func _ready():
     timer = Timer.new()
     timer.one_shot = true
-    timer.process_mode = Timer.TIMER_PROCESS_PHYSICS
+    timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
     bullet_instance = get_parent()
     add_child(timer)
 
@@ -83,7 +83,7 @@ func run():
         elif command is BulletMLWaitASTNode:
             command.expression = parse_value(command.value)
             timer.start(command.get_value())
-            yield(timer, "timeout")
+            await timer.timeout
         elif command is BulletMLPopParamsASTNode:
             params_stack.pop_back()
 
@@ -91,17 +91,17 @@ func stop():
     stack = []
 
 func push_params(params : Array):
-    if params.empty():
+    if params.is_empty():
         return
     params_stack.append(create_params(params))
 
 func create_params(params : Array) -> Array:
-    if params.empty():
+    if params.is_empty():
         return []
     
     var new_params : Array
 
-    if params_stack.empty():
+    if params_stack.is_empty():
         for param in params:
             new_params.append(parse_value(param).execute([], BulletMLContext))
     else:
@@ -112,9 +112,9 @@ func create_params(params : Array) -> Array:
 
 func parse_value(value : String) -> Expression:
     var expression = null
-    if value.empty() or value == null:
+    if value.is_empty() or value == null:
         expression = BulletMLContext._parse_expression("0")
-    elif params_stack.empty():
+    elif params_stack.is_empty():
         expression = BulletMLContext._parse_expression(value)
     else:
         var new_value = value
@@ -137,9 +137,8 @@ func run_fire(fire : BulletMLFireASTNode):
             fire.offset.vertical.expression = parse_value(fire.offset.vertical.value)
     if fire.bullet_ref:
         fire.bullet = bullets[fire.bullet_ref.label]
-        if not fire.bullet_ref.shooter.empty():
+        if not fire.bullet_ref.shooter.is_empty():
             fire.bullet.shooter = fire.bullet_ref.shooter
         BulletMLSpawnManager._spawn_bullet(bullet_instance, fire, create_params(fire.bullet_ref.params))
     else:
-        BulletMLSpawnManager._spawn_bullet(bullet_instance, fire, params_stack.back() if not params_stack.empty() else [])
-
+        BulletMLSpawnManager._spawn_bullet(bullet_instance, fire, params_stack.back() if not params_stack.is_empty() else [])
