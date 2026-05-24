@@ -117,6 +117,7 @@ func _on_accel(accel : BulletMLAccelASTNode):
         _accel_tween.kill()
     _accel_tween = create_tween()
     _accel_tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+    _accel_tween.set_parallel(true)
     _accel_tween.tween_property(self, "_speed_x", _accel_end.x, accel.term.get_value()).set_trans(Tween.TRANS_LINEAR)
     _accel_tween.tween_property(self, "_speed_y", _accel_end.y, accel.term.get_value()).set_trans(Tween.TRANS_LINEAR)
 
