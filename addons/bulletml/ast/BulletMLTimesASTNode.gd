@@ -1,0 +1,3 @@
+extends BulletMLValueElementASTNode
+
+class_name BulletMLTimesASTNode

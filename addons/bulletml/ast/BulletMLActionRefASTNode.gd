@@ -1,0 +1,3 @@
+extends BulletMLRefASTNode
+
+class_name BulletMLActionRefASTNode
