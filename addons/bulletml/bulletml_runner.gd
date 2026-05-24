@@ -141,5 +141,5 @@ func run_fire(fire : BulletMLFireASTNode):
             fire.bullet.shooter = fire.bullet_ref.shooter
         BulletMLSpawnManager._spawn_bullet(bullet_instance, fire, create_params(fire.bullet_ref.params))
     else:
-        BulletMLSpawnManager._spawn_bullet(bullet_instance, fire, params_stack.back())
+        BulletMLSpawnManager._spawn_bullet(bullet_instance, fire, params_stack.back() if not params_stack.empty() else [])
 

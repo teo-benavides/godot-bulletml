@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-class_name BulletMLBulletInstance
+class_name BulletMLBulletInstance, "res://addons/bulletml/icons/comet-blue.svg"
 
 signal bullet_ready(node)
 signal destroyed(_type)

@@ -3,6 +3,8 @@ extends Node
 var _parsed_scripts : Dictionary = {}
 var _temp_script: BulletMLParsedScript
 
+# Load BulletML scripts (XML files) from the given path.
+# You must call this before starting any BulletMLBulletEmitters
 func load_scripts(path: String):
     if not path.ends_with("/") and not path.ends_with("\\"):
         path = path + "/"

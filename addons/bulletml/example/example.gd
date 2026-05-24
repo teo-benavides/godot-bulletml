@@ -3,7 +3,9 @@ extends Node2D
 enum {
     BARRIER,
     BOWAP,
-    WHIP    
+    WHIP,
+    ENEMIES,
+    BOSS
 }
 
 const SCRIPTS_PATH = "res://addons/bulletml/example/bulletml_scripts/"
@@ -13,9 +15,13 @@ func _ready():
     BulletMLSpawnManager.bullet_registry = load("res://addons/bulletml/example/bullet_registry.tres")
     BulletMLContext.spawn_parent = get_path()
 
+    $BossEnemy.visible = false
+
     $UI/Container/OptionButton.add_item("barriers.xml", BARRIER)
     $UI/Container/OptionButton.add_item("bowap.xml", BOWAP)
     $UI/Container/OptionButton.add_item("whip-3x.xml", WHIP)
+    $UI/Container/OptionButton.add_item("enemies.xml", ENEMIES)
+    $UI/Container/OptionButton.add_item("boss.xml", BOSS)
     
     _configure_syntax_highlighting()
     
@@ -55,9 +61,13 @@ func _on_input_text_changed():
     $InputTimer.start()
 
 func _on_input_timer_timeout():
+    $BossEnemy.visible = false
+    $BossEnemy.stop()
     open_temp_script($UI/Container/Input.text)
 
 func _on_option_button_item_selected(index):
+    $BossEnemy.visible = false
+    $BossEnemy.stop()
     match index:
         BARRIER:
             $UI/Container/Input.text = get_script_file_contents("barriers.xml")
@@ -68,6 +78,14 @@ func _on_option_button_item_selected(index):
         WHIP:
             $UI/Container/Input.text = get_script_file_contents("whip-3x.xml")
             open_script("whip-3x.xml")
+        ENEMIES:
+            $UI/Container/Input.text = get_script_file_contents("enemies.xml")
+            open_script("enemies.xml")
+        BOSS:
+            get_tree().call_group("bulletml_bullet_instances", "queue_free")
+            $BossEnemy.visible = true
+            $BossEnemy.start()
+            $UI/Container/Input.text = get_script_file_contents("boss.xml")
 
 func _configure_syntax_highlighting():
     $UI/Container/Input.add_keyword_color("accel", Color.orange)
@@ -82,6 +100,7 @@ func _configure_syntax_highlighting():
     $UI/Container/Input.add_keyword_color("fireRef", Color.orange)
     $UI/Container/Input.add_keyword_color("horizontal", Color.orange)
     $UI/Container/Input.add_keyword_color("offset", Color.orange)
+    $UI/Container/Input.add_keyword_color("param", Color.orange)
     $UI/Container/Input.add_keyword_color("repeat", Color.orange)
     $UI/Container/Input.add_keyword_color("speed", Color.orange)
     $UI/Container/Input.add_keyword_color("term", Color.orange)

@@ -159,8 +159,8 @@ _global_script_class_icons={
 "BulletMLActionASTNode": "",
 "BulletMLActionRefASTNode": "",
 "BulletMLBulletASTNode": "",
-"BulletMLBulletEmitter": "",
-"BulletMLBulletInstance": "",
+"BulletMLBulletEmitter": "res://addons/bulletml/icons/gun-blue.svg",
+"BulletMLBulletInstance": "res://addons/bulletml/icons/comet-blue.svg",
 "BulletMLBulletRefASTNode": "",
 "BulletMLBulletRegistry": "",
 "BulletMLChangeDirectionASTNode": "",
@@ -189,7 +189,7 @@ _global_script_class_icons={
 [application]
 
 config/name="BulletML Sandbox 2"
-run/main_scene="res://addons/bulletml/example/sandbox.tscn"
+run/main_scene="res://addons/bulletml/example/example.tscn"
 config/icon="res://icon.png"
 
 [autoload]

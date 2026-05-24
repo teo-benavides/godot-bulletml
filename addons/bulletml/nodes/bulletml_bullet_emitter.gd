@@ -1,5 +1,5 @@
 extends BulletMLBulletInstance
-class_name BulletMLBulletEmitter
+class_name BulletMLBulletEmitter, "res://addons/bulletml/icons/gun-blue.svg"
 
 export(bool) var use_temp_script = false
 export(String) var script_filename
