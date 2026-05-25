@@ -1,9 +1,10 @@
 extends Node
-class_name _BulletMLRunner
+class_name BulletMLRunner
+## Internal BulletML class.
 
-signal change_direction(change_direction)
-signal change_speed(change_speed)
-signal accel(accel)
+signal change_direction(change_direction: BulletMLChangeDirectionASTNode)
+signal change_speed(change_speed: BulletMLChangeSpeedASTNode)
+signal accel(accel: BulletMLAccelASTNode)
 signal vanish
 signal spawn_requested
 
@@ -52,20 +53,20 @@ func run():
         elif command is BulletMLChangeSpeedASTNode:
             command.speed.expression = parse_value(command.speed.value)
             command.term.expression = parse_value(command.term.value)
-            emit_signal("change_speed", command)
+            change_speed.emit(command)
         elif command is BulletMLChangeDirectionASTNode:
             command.direction.expression = parse_value(command.direction.value)
             command.term.expression = parse_value(command.term.value)
-            emit_signal("change_direction", command)
+            change_direction.emit(command)
         elif command is BulletMLAccelASTNode:
             if command.horizontal:
                 command.horizontal.expression = parse_value(command.horizontal.value)
             if command.vertical:
                 command.vertical.expression = parse_value(command.vertical.value)
             command.term.expression = parse_value(command.term.value)
-            emit_signal("accel", command)
+            accel.emit(command)
         elif command is BulletMLVanishASTNode:
-            emit_signal("vanish")
+            vanish.emit()
         elif command is BulletMLRepeatASTNode:
             var rep_action = BulletMLRepeatedActionASTNode.new()
             rep_action.action = command.action

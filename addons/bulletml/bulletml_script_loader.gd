@@ -1,5 +1,6 @@
 extends RefCounted
 class_name BulletMLScriptLoader
+## Internal BulletML class.
 
 static func parse_script(file : String) -> BulletMLParsedScript:
     var xml = XMLParser.new()
@@ -321,4 +322,3 @@ static func skip_to_closing(name : String, xml : XMLParser) -> void:
     while not is_closing(name, xml) and not (xml.is_empty() and xml.get_node_name() == name):
         if xml.read():
             break
-

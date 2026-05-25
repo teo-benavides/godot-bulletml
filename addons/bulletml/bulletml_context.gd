@@ -8,12 +8,13 @@ const SPEED_MULTIPLIER = 1
 var _param_regex = RegEx.new()
 var _delta_inc = 0
 
-## Update this every _process() or _physics_process() in your game.
+## Update this every [method Node._process] or [method Node._physics_process]
+## in your game.
 ## It's used for bullets which aim at the player.
 var player_position: Vector2
 
 ## Where bullets will be spawned.
-## You must set this before starting any BulletMLBulletEmitters.
+## You must set this before starting any [BulletMLBulletEmitter]s.
 var spawn_parent: NodePath
 
 func _ready():
@@ -31,7 +32,7 @@ func _parse_expression(expression : String) -> Expression:
         return null
 
 ## Can be used from within BulletML scripts to get the current game time.
-## Simply use time() wherever you need it from within your scripts.
+## Simply use [code]time()[/code] wherever you need it from within your scripts.
 ## Useful for some patterns.
 func time() -> float:
     return _delta_inc

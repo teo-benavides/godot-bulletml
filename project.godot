@@ -17,9 +17,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-BulletMLContext="*res://addons/bulletml/bulletml_context.gd"
-BulletMLScriptRepository="*res://addons/bulletml/bulletml_script_repository.gd"
-BulletMLSpawnManager="*res://addons/bulletml/bulletml_spawn_manager.gd"
+BulletMLContext="*uid://dvxj33d0rj0g6"
+BulletMLScriptRepository="*uid://cdnmw6op1jbd4"
+BulletMLSpawnManager="*uid://dh11ijo1rjl5h"
 
 [editor_plugins]
 

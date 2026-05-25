@@ -1,17 +1,21 @@
 @icon("res://addons/bulletml/icons/comet-blue.svg")
 extends CharacterBody2D
-
 class_name BulletMLBulletInstance
+## Bullet spawnable from BulletML scripts.
+##
+## A bullet which can be spawned by BulletML.
+## Extend this in your bullet scenes to allow them to be spawned by the addon.
 
-## Emitted after _ready() is run.
-signal bullet_ready(node)
+## Emitted after [method Node._ready] is run.
+signal bullet_ready(bullet: BulletMLBulletInstance)
 
-## Emitted when destroying the bullet, before it is freed with queue_free().
-signal destroyed(_type)
+## Emitted when destroying the bullet, before it is freed with
+## [method Node.queue_free].
+signal destroyed(type: String)
 
 var _bullet : BulletMLBulletASTNode
 
-var _runner: _BulletMLRunner
+var _runner: BulletMLRunner
 
 var _type : String
 
@@ -42,8 +46,9 @@ var _accel_tween: Tween
 ## Disable if you want to set the position via the editor.
 @export var initialize_position: bool = true
 
-## Exempt from the bulletml_bullet_instances group.
-## If you free bullets using call_group, this is useful for keeping it alive.
+## Exempt from the [code]bulletml_bullet_instances[/code] group.
+## If you free bullets using [method SceneTree.call_group],
+## this is useful for keeping it alive.
 @export var exempt_from_group: bool = false
 
 ## Whether the bullet rotates depending on its direction.
@@ -64,15 +69,15 @@ func _ready():
         return
     
     if not _runner:
-        _runner = _BulletMLRunner.new()
+        _runner = BulletMLRunner.new()
     if not _runner in get_children():
         add_child(_runner)
-    _runner.connect("change_direction", Callable(self, "_on_change_direction"))
-    _runner.connect("change_speed", Callable(self, "_on_change_speed"))
-    _runner.connect("accel", Callable(self, "_on_accel"))
-    _runner.connect("vanish", Callable(self, "_on_vanish"))
+    _runner.change_direction.connect(_on_change_direction)
+    _runner.change_speed.connect(_on_change_speed)
+    _runner.accel.connect(_on_accel)
+    _runner.vanish.connect(_on_vanish)
 
-    emit_signal("bullet_ready", self)
+    bullet_ready.emit(self)
 
 func _physics_process(delta):
     velocity = Vector2.ZERO
@@ -90,9 +95,9 @@ func start():
     _runner.run()
 
 ## Destroy the bullet.
-## Emits the signal destroyed and runs queue_free().
+## Emits [signal destroyed] and runs [method Node.queue_free].
 func destroy():
-    emit_signal("destroyed", _type)
+    destroyed.emit(_type)
     queue_free()
 
 func _on_change_direction(change_direction : BulletMLChangeDirectionASTNode):

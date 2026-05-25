@@ -1,7 +1,7 @@
-# BulletML Addon for Godot 3
+# BulletML Addon for Godot 4
 ## Overview
 This addon lets you use [BulletML](https://www.asahi-net.or.jp/~cs8k-cyu/bulletml/index_e.html) scripts in your game to spawn bullet patterns, mainly for bullet hell games.  
-I highly recommend checking out the example scene found in `addons/bulletml/example.tscn` to see an example of how you can set up things.
+I highly recommend checking out the example scene found in `addons/bulletml/example/example.tscn` to see an example of how you can set up things.
 ## Quick Start
 1. Download the addon and enable it from Project -> Project Settings -> Plugins.
 2. Create bullet scenes by using `BulletMLBulletInstance` as the root node, or by extending the `BulletMLBulletInstance` script.  
@@ -13,7 +13,7 @@ If making a typical scroller shmup, I recommend the script file to be something 
     - Call `BulletMLScriptRepository.load_scripts(path: String)`, passing in the path to the folder containing your BulletML scripts.
     - Set `BulletMLSpawnManager.bullet_registry` to the `BulletMLBulletRegistry` resource you previously created.
     - Set `BulletMLContext.spawn_parent` to a `NodePath` pointing to the node you'd like to spawn bullets under.
-    - Start your emitter with `start()`  
+    - Start your emitter with `start()`.  
     
     Example:  
     ```gdscript
@@ -61,7 +61,7 @@ Executes the BulletML script provided in `script_filename`, or a temporary scrip
 Extends `BulletMLBulletInstance`.
 #### Properties
 `use_temp_script` (`bool`):  
-Whether to use the temporary script loaded via BulletMLScriptRepository.load_temp_script().  
+Whether to use the temporary script loaded via `BulletMLScriptRepository.load_temp_script(script: String)`.  
 Defaults to `false`.
 
 `script_filename` (`String`):  
@@ -81,7 +81,7 @@ Resume BulletML script execution.
 #### Properties  
 `player_position` (`Vector2`):  
 Update this every `_process()` or `_physics_process()` in your game.  
-It's used for bullets which aim at the player.  
+It's used for bullets which aim at the player, i.e. when a `<direction>`'s `type` attribute equals `"aim"`.  
 
 `spawn_parent` (`NodePath`):  
 Where bullets will be spawned.  
@@ -115,13 +115,21 @@ Emitted when a `BulletMLBulletInstance` is destroyed, before its `queue_free()`.
 Has an `entries` Dictionary, which should be populated by bullet type strings in the keys, and scenes extending `BulletMLBulletInstance` in the values.  
 You must assign a `BulletMLBulletRegistry` resource to `BulletMLSpawnManager.bullet_registry` for bullets to be able to spawn.
 
+## Groups
+### bulletml_bullet_instances
+All spawned `BulletMLBulletInstance`s and `BulletMLBulletEmitter`s belong to this group. This is useful, for example, for using `get_tree().call_group("bulletml_bullet_instances", "destroy")` for destroying all bullets and emitters at once.
+
 ## Differences with standard BulletML
 - No `<bulletml>` node.
-- `NUMBER` values can be any valid GDScript expression, meaning you can use built-in functions like `lerp()`, `rand_range()`, etc.
+- `NUMBER` values can be any valid GDScript expression, meaning you can use built-in functions like `lerp()`, `randf_range()`, etc.
     - Functions defined in `BulletMLContext` can be used within these expressions.
     - `time()` is one such function.
-    - `$rand` and `$rank` cannot be used. `$rand` would be redundant, `$rank` you could implement yourself depending on your game's requirements, for example by using an AutoLoad with a rank property or by modifying `BulletMLContext` and adding a function that returns rank.
+    - `$rand` and `$rank` cannot be used. `$rand` would be redundant, `$rank` you could implement yourself depending on your game's requirements, for example by using an AutoLoad with a `rank` property or by modifying `BulletMLContext` and adding a function that returns rank.
 - BulletML scripts require an `<action>` with `label="top"`, which is the action that will be run upon executing that script.
-- `<bullet>`s can have a `type` attribute, which indicates the bullet type, a string that is used for fetching the bullet scene from the `BulletMLBulletRegistry`
+- `<bullet>`s can have a `type` attribute, which indicates the bullet type, a string that is used for fetching the bullet scene from the `BulletMLBulletRegistry`.
 - `<bullet>`s can have a `shooter` attribute, a string that corresponds to a BulletML script filename (just the filename, not the whole path). Upon being spawned, the bullet will execute the script pointed to by `shooter`. Example: `<bullet type="example" shooter="example.xml">`
 - `<wait>` and `<term>` use seconds instead of frames.
+
+## Special Thanks
+- https://github.com/daishihmr/bulletml.js
+- https://github.com/foxssake/plenticons

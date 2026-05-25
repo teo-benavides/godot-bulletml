@@ -1,14 +1,14 @@
-[gd_resource type="Resource" load_steps=5 format=2]
+[gd_resource type="Resource" script_class="BulletMLBulletRegistry" format=3 uid="uid://2dyypirluvs5"]
 
-[ext_resource path="res://addons/bulletml/bulletml_bullet_registry.gd" type="Script" id=1]
-[ext_resource path="res://addons/bulletml/example/bullets/example_bullet.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/bulletml/example/bullets/spawner_bullet.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/bulletml/example/enemies/example_enemy.tscn" type="PackedScene" id=4]
+[ext_resource type="Script" uid="uid://j1ri786dxgg8" path="res://addons/bulletml/bulletml_bullet_registry.gd" id="1"]
+[ext_resource type="PackedScene" path="res://addons/bulletml/example/bullets/example_bullet.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://addons/bulletml/example/bullets/spawner_bullet.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://addons/bulletml/example/enemies/example_enemy.tscn" id="4"]
 
 [resource]
-script = ExtResource( 1 )
+script = ExtResource("1")
 entries = {
-"example": ExtResource( 2 ),
-"spawner": ExtResource( 3 ),
-"zako": ExtResource( 4 )
+"example": ExtResource("2"),
+"spawner": ExtResource("3"),
+"zako": ExtResource("4")
 }

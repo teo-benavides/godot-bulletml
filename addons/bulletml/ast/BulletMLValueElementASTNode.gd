@@ -1,5 +1,6 @@
 extends RefCounted
 class_name BulletMLValueElementASTNode
+## Internal BulletML class.
 
 var expression : Expression
 var value : String
