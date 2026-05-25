@@ -134,6 +134,7 @@ All spawned `BulletMLBulletInstance`s and `BulletMLBulletEmitter`s belong to thi
 - `<bullet>`s can have a `type` attribute, which indicates the bullet type, a string that is used for fetching the bullet scene from the `BulletMLBulletRegistry`.
 - `<bullet>`s can have a `shooter` attribute, a string that corresponds to a BulletML script filename (just the filename, not the whole path). Upon being spawned, the bullet will execute the script pointed to by `shooter`. Example: `<bullet type="example" shooter="example.xml">`
 - `<wait>` and `<term>` use seconds instead of frames.
+- Added `<offset>` node, which can contain `<horizontal>` and `<vertical>` nodes. `<offset>` can go inside `<fire>` and determines a spawn offset for the fired bullet.
 
 ## Special Thanks
 - https://github.com/daishihmr/bulletml.js
