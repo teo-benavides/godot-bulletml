@@ -166,7 +166,7 @@ As with `<accel>`, `<horizontal>` and `<vertical>` can take a `type` attribute. 
             <bullet type="example"/>
         </fire>
     ```
-
+- If a `<repeat>`'s `<times>` is set to `-1` or omitted, the `<action>` will repeat forever.
 ## Special Thanks
 - https://github.com/daishihmr/bulletml.js
 - https://github.com/foxssake/plenticons
