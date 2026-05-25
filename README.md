@@ -134,7 +134,38 @@ All spawned `BulletMLBulletInstance`s and `BulletMLBulletEmitter`s belong to thi
 - `<bullet>`s can have a `type` attribute, which indicates the bullet type, a string that is used for fetching the bullet scene from the `BulletMLBulletRegistry`.
 - `<bullet>`s can have a `shooter` attribute, a string that corresponds to a BulletML script filename (just the filename, not the whole path). Upon being spawned, the bullet will execute the script pointed to by `shooter`. Example: `<bullet type="example" shooter="example.xml">`
 - `<wait>` and `<term>` use seconds instead of frames.
-- Added `<offset>` node, which can contain `<horizontal>` and `<vertical>` nodes. `<offset>` can go inside `<fire>` and determines a spawn offset for the fired bullet.
+- Added `<offset>` node, which can contain `<horizontal>` and `<vertical>` nodes. `<offset>` can go inside `<fire>` and determines a spawn offset for the fired bullet. If no `<horizontal>` nor `<vertical>` is provided, the offset is relative to the bullet's local (accounting for its angle) up vector, and the expression directly inside `<offset>` is taken as the offset value.  
+As with `<accel>`, `<horizontal>` and `<vertical>` can take a `type` attribute. If `"absolute"` or `"sequence"`, instead of working as an offset, the value sets the global position on that axis. If `"relative"` or if `type` is omitted, it's an actual offset off of the spawner's position.  
+    Examples:
+    ```xml
+        <fire>
+            <direction type="aim">0</direction>
+            <speed type="absolute">250</speed>
+            <offset>15</offset>
+            <bullet type="example"/>
+        </fire>
+
+        <fire>
+            <direction type="aim">0</direction>
+            <speed type="absolute">250</speed>
+            <offset>
+                <horizontal>10</horizontal>
+                <vertical>20</vertical>
+            </offset>
+            <bullet type="example"/>
+        </fire>
+
+        <fire>
+            <direction type="aim">0</direction>
+            <speed type="absolute">250</speed>
+            <offset>
+                <!-- Bullet will be spawned at the top left corner of the screen -->
+                <horizontal type="absolute">0</horizontal>
+                <vertical type="absolute">0</vertical>
+            </offset>
+            <bullet type="example"/>
+        </fire>
+    ```
 
 ## Special Thanks
 - https://github.com/daishihmr/bulletml.js
