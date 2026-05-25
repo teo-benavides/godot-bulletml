@@ -24,13 +24,13 @@ If making a typical scroller shmup, I recommend the script file to be something 
     ```gdscript
     const SCRIPTS_PATH = "res://addons/bulletml/example/bulletml_scripts/"
     const REGISTRY_PATH = "res://addons/bulletml/example/other/bullet_registry.tres"
-    export(NodePath) var emitter_path # Should be the path to a BulletMLBulletEmitter
+    @export var emitter: BulletMLBulletEmitter
 
     func _ready():
         BulletMLScriptRepository.load_scripts(SCRIPTS_PATH)
         BulletMLSpawnManager.bullet_registry = load(REGISTRY_PATH)
         BulletMLContext.spawn_parent = get_path()
-        get_node(emitter_path).start()
+        emitter.start()
     ```
 
 ## Nodes
