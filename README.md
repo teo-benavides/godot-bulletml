@@ -4,7 +4,9 @@
 This addon lets you use [BulletML](https://www.asahi-net.or.jp/~cs8k-cyu/bulletml/index_e.html) scripts in your game to spawn bullet patterns, mainly for bullet hell games.  
 I highly recommend checking out the example scene found in `addons/bulletml/example/example.tscn` to see an example of how you can set up things. This scene lets you select a few different BulletML scripts via a dropdown in order to execute them, and also lets you edit BulletML live via a text editor (this is what the GIF above is showcasing).  
 
-Under `addons/bulletml/example/bulletml_scripts` you'll also find some BulletML scripts, so you can get familiarized with it.
+Under `addons/bulletml/example/bulletml_scripts` you'll also find some BulletML scripts, so you can get familiarized with it.  
+
+I also recommend reading the whole documentation found below. It's fairly short and it might clear up whatever confusions you may have.
 ## Quick Start
 1. Download the addon and enable it from Project -> Project Settings -> Plugins.
 2. Create bullet scenes by using `BulletMLBulletInstance` as the root node, or by extending the `BulletMLBulletInstance` script.  
