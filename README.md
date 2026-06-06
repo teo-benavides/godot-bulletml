@@ -1,5 +1,7 @@
 # BulletML Addon for Godot 4
 ![](showcase.gif)
+## ⚠️ Note  
+**I highly recommend checking out [Tama](https://github.com/teo-benavides/tama) instead.** It's a simple Godot framework for bullet hell creation, using an original scripting language called TamaScript. TamaScript is heavily inspired by BulletML, but is far less verbose, and contains a lot of additional features. On top of this, Tama provides performant bullets that aren't based on Godot nodes/scenes, letting you spawn thousands upon thousands of them.
 ## Overview
 This addon lets you use [BulletML](https://www.asahi-net.or.jp/~cs8k-cyu/bulletml/index_e.html) scripts in your game to spawn bullet patterns, mainly for bullet hell games.  
 I highly recommend checking out the example scene found in `addons/bulletml/example/example.tscn` to see an example of how you can set up things. This scene lets you select a few different BulletML scripts via a dropdown in order to execute them, and also lets you edit BulletML live via a text editor (this is what the GIF above is showcasing).  
